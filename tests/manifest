@@ -1,0 +1,10 @@
+: 1
+name: libstud-uuid
+project: libstud
+version: 0.1.0-a.0.z
+summary: UUID generation library
+license: MIT
+url: https://github.com/libstud/libstud-uuid
+email: boris@codesynthesis.com
+depends: * build2 >= 0.8.0-
+depends: * bpkg >= 0.8.0-

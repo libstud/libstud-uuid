@@ -1,0 +1,6 @@
+$out_root/
+{
+  include libstud/uuid/
+}
+
+export $out_root/libstud/uuid/lib{stud-uuid}

@@ -1,0 +1,44 @@
+lib{stud-uuid}: {hxx ixx cxx}{uuid} {hxx cxx}{uuid-io} hxx{export version}
+
+lib{stud-uuid}: cxx{uuid-linux}:   include = ($cxx.target.class  == 'linux')
+lib{stud-uuid}: cxx{uuid-macos}:   include = ($cxx.target.class  == 'macos')
+lib{stud-uuid}: cxx{uuid-windows}: include = ($cxx.target.class  == 'windows')
+lib{stud-uuid}: cxx{uuid-freebsd}: include = ($cxx.target.system == 'freebsd')
+
+if   ($cxx.target.class == 'linux')
+  cxx.libs += -ldl
+elif ($cxx.target.class == 'macos')
+  cxx.libs += -framework CoreFoundation
+elif ($cxx.target.class == 'windows')
+  cxx.libs += ($cxx.target.system == 'mingw32' ? -lrpcrt4 : rpcrt4.lib)
+
+# Include the generated version header into the distribution (so that we don't
+# pick up an installed one) and don't remove it when cleaning in src (so that
+# clean results in a state identical to distributed).
+#
+hxx{version}: in{version} $src_root/manifest
+hxx{version}: dist  = true
+hxx{version}: clean = ($src_root != $out_root)
+
+cxx.poptions =+ "-I$out_root" "-I$src_root"
+lib{stud-uuid}: cxx.export.poptions = "-I$out_root" "-I$src_root"
+
+liba{stud-uuid}: cxx.export.poptions += -DLIBSTUD_UUID_STATIC
+libs{stud-uuid}: cxx.export.poptions += -DLIBSTUD_UUID_SHARED
+
+obja{*}: cxx.poptions += -DLIBSTUD_UUID_STATIC_BUILD
+objs{*}: cxx.poptions += -DLIBSTUD_UUID_SHARED_BUILD
+
+# For pre-releases use the complete version to make sure they cannot be used
+# in place of another pre-release or the final version.
+#
+if $version.pre_release
+  lib{stud-uuid}: bin.lib.version = @"-$version.project_id"
+else
+  lib{stud-uuid}: bin.lib.version = @"-$version.major.$version.minor"
+
+# Install into the libstud/uuid/ subdirectory of, say, /usr/include/
+# recreating subdirectories.
+#
+{hxx ixx txx}{*}: install         = include/libstud/uuid/
+{hxx ixx txx}{*}: install.subdirs = true

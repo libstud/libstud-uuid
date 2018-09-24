@@ -1,0 +1,3 @@
+import libs = libstud-uuid%lib{stud-uuid}
+
+exe{driver}: {hxx ixx txx cxx}{**} $libs testscript{**}
