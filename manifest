@@ -1,7 +1,7 @@
 : 1
 name: libstud-uuid
 project: libstud
-version: 0.1.0-a.0.z
+version: 1.0.0
 summary: UUID generation library
 license: MIT
 url: https://github.com/libstud/libstud-uuid
