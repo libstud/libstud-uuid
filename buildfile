@@ -1,4 +1,4 @@
-./: {*/ -build/} manifest
+./: {*/ -build/} doc{README NEWS} manifest
 
 # Don't install tests.
 #

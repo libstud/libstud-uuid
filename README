@@ -20,6 +20,7 @@ int main ()
 }
 
 See the <libstud/uuid/uuid.hxx> header for interface details.
+See the NEWS file for changes.
 
 Supported platforms:  Linux, Windows, Mac OS, FreeBSD.
 Supported compilers:  GCC >= 4.9, Clang >= 3.8, MSVC >= 14u3.
