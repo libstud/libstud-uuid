@@ -1,9 +1,11 @@
 : 1
 name: libstud-uuid
 project: libstud
-version: 1.0.0
-summary: UUID generation library
+version: 1.0.0+1
+summary: Portable UUID generation library for C++
 license: MIT
+description-file: README
+changes-file: NEWS
 url: https://github.com/libstud/libstud-uuid
 email: boris@codesynthesis.com
 depends: * build2 >= 0.8.0-
