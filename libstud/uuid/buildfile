@@ -17,20 +17,29 @@ elif ($cxx.target.class == 'windows')
 # clean results in a state identical to distributed).
 #
 hxx{version}: in{version} $src_root/manifest
-hxx{version}: dist  = true
-hxx{version}: clean = ($src_root != $out_root)
+hxx{version}:
+{
+  dist  = true
+  clean = ($src_root != $out_root)
+}
 
+# Build options.
+#
 cxx.poptions =+ "-I$out_root" "-I$src_root"
+
+obja{*}: cxx.poptions += -DLIBSTUD_UUID_STATIC_BUILD
+objs{*}: cxx.poptions += -DLIBSTUD_UUID_SHARED_BUILD
+
+# Export options.
+#
 lib{stud-uuid}: cxx.export.poptions = "-I$out_root" "-I$src_root"
 
 liba{stud-uuid}: cxx.export.poptions += -DLIBSTUD_UUID_STATIC
 libs{stud-uuid}: cxx.export.poptions += -DLIBSTUD_UUID_SHARED
 
-obja{*}: cxx.poptions += -DLIBSTUD_UUID_STATIC_BUILD
-objs{*}: cxx.poptions += -DLIBSTUD_UUID_SHARED_BUILD
-
 # For pre-releases use the complete version to make sure they cannot be used
-# in place of another pre-release or the final version.
+# in place of another pre-release or the final version. See the version module
+# for details on the version.* variable values.
 #
 if $version.pre_release
   lib{stud-uuid}: bin.lib.version = @"-$version.project_id"
@@ -40,5 +49,8 @@ else
 # Install into the libstud/uuid/ subdirectory of, say, /usr/include/
 # recreating subdirectories.
 #
-{hxx ixx txx}{*}: install         = include/libstud/uuid/
-{hxx ixx txx}{*}: install.subdirs = true
+{hxx ixx txx}{*}:
+{
+  install         = include/libstud/uuid/
+  install.subdirs = true
+}

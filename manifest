@@ -8,5 +8,6 @@ description-file: README
 changes-file: NEWS
 url: https://github.com/libstud/libstud-uuid
 email: boris@codesynthesis.com
-depends: * build2 >= 0.8.0-
-depends: * bpkg >= 0.8.0-
+builds: all
+depends: * build2 >= 0.9.0
+depends: * bpkg >= 0.9.0
