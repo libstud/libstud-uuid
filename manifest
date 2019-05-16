@@ -4,10 +4,10 @@ project: libstud
 version: 1.0.2-a.0.z
 summary: Portable UUID generation library for C++
 license: MIT
-description-file: README
+description-file: README.md
 changes-file: NEWS
 url: https://github.com/libstud/libstud-uuid
 email: boris@codesynthesis.com
 builds: all
-depends: * build2 >= 0.9.0
-depends: * bpkg >= 0.9.0
+depends: * build2 >= 0.11.0-
+depends: * bpkg >= 0.11.0-
