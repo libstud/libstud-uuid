@@ -1,4 +1,4 @@
-# libstud-uuid - portable UUID generation library for C++
+# libstud-uuid - UUID generation library for C++
 
 This `build2` package contains a portable, dependency-free, MIT-licensed UUID
 generation library for C++ that makes sure the generated IDs are actually
