@@ -24,8 +24,8 @@ int main ()
 }
 ```
 
-See the `libstud/uuid/uuid.hxx` header for interface details. See the
-`NEWS` file for changes.
+See the [`libstud/uuid/uuid.hxx`][uuid.hxx] header for interface details. See
+the [`NEWS`][news] file for changes.
 
 Supported platforms:
 
@@ -39,3 +39,6 @@ Supported compilers:
 * GCC 4.9 or later
 * Clang 3.8 or later
 * MSVC  14.3 or later
+
+[news]:     https://github.com/libstud/libstud-uuid/blob/master/NEWS
+[uuid.hxx]: https://github.com/libstud/libstud-uuid/blob/master/libstud/uuid/uuid.hxx
