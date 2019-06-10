@@ -1,8 +1,7 @@
 # libstud-uuid - UUID generation library for C++
 
-This `build2` package contains a portable, dependency-free, MIT-licensed UUID
-generation library for C++ that makes sure the generated IDs are actually
-unique.
+A portable, dependency-free, MIT-licensed UUID generation library for C++ that
+makes sure the generated IDs are actually unique.
 
 Typical usage:
 
@@ -18,7 +17,7 @@ int main ()
   using stud::uuid;
   using namespace std;
 
-  uuid u (uuid::generate ()); // Generate strong ID using system generator.
+  uuid u (uuid::generate ()); // Make strong ID using system generator.
   string s (u.string ());     // xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   cout << u << endl;          // Print string representation.
 }
