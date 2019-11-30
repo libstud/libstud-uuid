@@ -5,12 +5,20 @@ lib{stud-uuid}: cxx{uuid-macos}:   include = ($cxx.target.class  == 'macos')
 lib{stud-uuid}: cxx{uuid-windows}: include = ($cxx.target.class  == 'windows')
 lib{stud-uuid}: cxx{uuid-freebsd}: include = ($cxx.target.system == 'freebsd')
 
-if   ($cxx.target.class == 'linux')
-  cxx.libs += -ldl
-elif ($cxx.target.class == 'macos')
-  cxx.libs += -framework CoreFoundation
-elif ($cxx.target.class == 'windows')
-  cxx.libs += ($cxx.target.system == 'mingw32' ? -lrpcrt4 : rpcrt4.lib)
+switch $cxx.target.class, $cxx.target.system
+{
+  case 'linux'
+    cxx.libs += -ldl
+
+  case 'macos'
+    cxx.libs += -framework CoreFoundation
+
+  case 'windows', 'mingw32'
+    cxx.libs += -lrpcrt4
+
+  case 'windows'
+    cxx.libs += rpcrt4.lib
+}
 
 # Include the generated version header into the distribution (so that we don't
 # pick up an installed one) and don't remove it when cleaning in src (so that
