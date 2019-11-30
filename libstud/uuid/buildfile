@@ -17,7 +17,6 @@ elif ($cxx.target.class == 'windows')
 # clean results in a state identical to distributed).
 #
 hxx{version}: in{version} $src_root/manifest
-hxx{version}:
 {
   dist  = true
   clean = ($src_root != $out_root)
