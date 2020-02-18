@@ -1,4 +1,4 @@
-./: {*/ -build/} doc{README.md NEWS LICENSE COPYRIGHT} manifest
+./: {*/ -build/} doc{README.md NEWS LICENSE AUTHORS} manifest
 
 # Don't install tests.
 #
