@@ -10,6 +10,7 @@ description-file: README.md
 changes-file: NEWS
 url: https://github.com/libstud/libstud-uuid
 email: boris@codesynthesis.com
+build-warning-email: boris@codesynthesis.com
 builds: all
-depends: * build2 >= 0.12.0
-depends: * bpkg >= 0.12.0
+depends: * build2 >= 0.13.0
+depends: * bpkg >= 0.13.0
