@@ -1,11 +1,15 @@
 lib{stud-uuid}: {hxx ixx cxx}{uuid} {hxx cxx}{uuid-io} hxx{export version}
 
-lib{stud-uuid}: cxx{uuid-linux}:   include = ($cxx.target.class  == 'linux')
-lib{stud-uuid}: cxx{uuid-macos}:   include = ($cxx.target.class  == 'macos')
-lib{stud-uuid}: cxx{uuid-windows}: include = ($cxx.target.class  == 'windows')
-lib{stud-uuid}: cxx{uuid-freebsd}: include = ($cxx.target.system == 'freebsd')
+tcls = $cxx.target.class
+tsys = $cxx.target.system
 
-switch $cxx.target.class, $cxx.target.system
+lib{stud-uuid}: cxx{uuid-linux}:   include = ($tcls  == 'linux')
+lib{stud-uuid}: cxx{uuid-macos}:   include = ($tcls  == 'macos')
+lib{stud-uuid}: cxx{uuid-windows}: include = ($tcls  == 'windows')
+lib{stud-uuid}: cxx{uuid-freebsd}: include = ($tsys == 'freebsd' || \
+                                              $tsys == 'netbsd')
+
+switch $tcls, $tsys
 {
   case 'linux'
     cxx.libs += -ldl

@@ -18,15 +18,15 @@ namespace stud
   uuid uuid_system_generator::
   generate (bool strong)
   {
-    // While FreeBSD shares the uuid_*() (<uuid.h>, uuid(3)) API with other
-    // BSDs, its documentation is quite light on the kind of UUID we get and
-    // with what guarantees. The implementation of uuid_create() simply calls
-    // the uuidgen() system call (<sys/uuid.h>, uuidgen(2)) which has some
+    // While FreeBSD shares the uuid_*() (<uuid.h>, uuid(3)) API with OpenBSD,
+    // its documentation is quite light on the kind of UUID we get and with
+    // what guarantees. The implementation of uuid_create() simply calls the
+    // uuidgen() system call (<sys/uuid.h>, uuidgen(2)) which has some
     // details.
     //
     // Specifically (and as of FreeBSD 11.2), we get a version 1 (MAC/time-
     // based) UUID and it seems there is provision for getting the time in a
-    // collision-safe:
+    // collision-safe manner:
     //
     // "According to the algorithm of generating time-based UUIDs, this will
     //  also force a new random clock sequence, thereby increasing the
@@ -37,6 +37,14 @@ namespace stud
     // the default (as seems to be the trend); presumably, FreeBSD folks are
     // smart enough not to start return random UUIDs without a good source of
     // randomness, at least not by default.
+    //
+    // When it comes to NetBSD, there is this HISTORY note in the uuidgen(2)
+    // man page:
+    //
+    // "It was changed to use version 4 UUIDs, i.e. randomly generated UUIDs,
+    // in NetBSD 8.0."
+    //
+    // And we will assume random NetBSD UUIDs are strong.
     //
     struct ::uuid d;
 
