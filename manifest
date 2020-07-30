@@ -9,8 +9,8 @@ keywords: guid
 description-file: README.md
 changes-file: NEWS
 url: https://github.com/libstud/libstud-uuid
-email: boris@codesynthesis.com
-build-warning-email: boris@codesynthesis.com
+email: libstud-authors@build2.org
+build-warning-email: libstud-authors@build2.org
 builds: all
 depends: * build2 >= 0.13.0
 depends: * bpkg >= 0.13.0
