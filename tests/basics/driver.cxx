@@ -2,12 +2,14 @@
 #  include <rpc.h> // GUID
 #endif
 
-#include <cassert>
 #include <sstream>
 #include <iostream>
 
 #include <libstud/uuid/uuid.hxx>
 #include <libstud/uuid/uuid-io.hxx>
+
+#undef NDEBUG
+#include <cassert>
 
 using namespace std;
 using namespace stud;
