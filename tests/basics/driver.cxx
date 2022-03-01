@@ -13,6 +13,14 @@
 using namespace std;
 using namespace stud;
 
+// Some platforms don't support stron UUIDs so we test weak.
+//
+#if defined(__EMSCRIPTEN__)
+static const bool strong = false;
+#else
+static const bool strong = true;
+#endif
+
 int main ()
 {
   // Nil.
@@ -22,8 +30,8 @@ int main ()
 
   // System generator.
   //
-  uuid u1 (uuid::generate ());
-  uuid u2 (uuid::generate ());
+  uuid u1 (uuid::generate (strong));
+  uuid u2 (uuid::generate (strong));
 
   assert (u1 && u2);
   assert (u1 != u2);

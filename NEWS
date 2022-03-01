@@ -2,6 +2,10 @@ Version 1.0.5
 
   * Add the <libstud/uuid.hxx> convenience header.
 
+  * Add support for Emscripten.
+
+    Note that currently only weak UUIDs can be generated on this platform.
+
 Version 1.0.0
 
   * First public release.
