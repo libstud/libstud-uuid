@@ -35,6 +35,8 @@ hxx{version}: in{version} $src_root/manifest
   clean = ($src_root != $out_root)
 }
 
+hxx{export}@./: cxx.importable = false
+
 # Build options.
 #
 cxx.poptions =+ "-I$out_root" "-I$src_root"
