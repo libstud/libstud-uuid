@@ -1,0 +1,6 @@
+: 1
+name: libstud-uuid
+version: 1.0.5
+project: libstud
+summary: Portable UUID generation library for C++
+license: MIT; MIT License.
