@@ -14,11 +14,17 @@ struct _GUID; // GUID and UUID.
 
 namespace stud
 {
-  // Universally-unique identifier (UUID), RFC4122:
+  //-
+  // Universally-unique identifier (UUID).
   //
-  // https://tools.ietf.org/html/rfc4122
+  // See RFC4122[1] for background.
+  //
+  // [1]: https://tools.ietf.org/html/rfc4122
+  //-
 
-  // The UUID variant (type). Nil UUID is DCE.
+  //- #uuid_variant `uuid_variant`
+  //
+  // UUID variant (type). Nil UUID is DCE.
   //
   enum class uuid_variant
   {
@@ -27,8 +33,11 @@ namespace stud
     microsoft, // Microsoft backward compatibility.
     other      // Currently reserved for possible future definition.
   };
+  //-
 
-  // The DCE UUID version (sub-type). Nil UUID is random.
+  //- #uuid_version `uuid_version`
+  //
+  // DCE UUID version (sub-type). Nil UUID is random.
   //
   enum class uuid_version
   {
@@ -38,12 +47,36 @@ namespace stud
     random   = 4, // Randomly or pseudo-randomly generated.
     sha1     = 5  // Name-based with SHA1 hashing.
   };
+  //-
 
   class LIBSTUD_UUID_SYMEXPORT uuid_system_generator;
 
+  //- #uuid `uuid`
+  //
+  // UUID value type. Typical usage:
+  //
+  //     #include <string>
+  //     #include <iostream>
+  //
+  //     #include <libstud/uuid/uuid.hxx>
+  //     #include <libstud/uuid/uuid-io.hxx>
+  //
+  //     int main ()
+  //     {
+  //       using stud::uuid;
+  //       using namespace std;
+  //
+  //       uuid u (uuid::generate ()); // Generate using system generator.
+  //       string s (u.string ());     // xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  //       cout << u << endl;          // Print string representation.
+  //     }
+  //
   struct LIBSTUD_UUID_SYMEXPORT uuid
+  //-
   {
-    // Normally not accessed directly (see RFC4122 Section 4.1.2).
+    //-
+    // Data members are normally not accessed directly (see RFC4122, Section
+    // 4.1.2).
     //
     std::uint32_t time_low = 0;
     std::uint16_t time_mid = 0;
@@ -51,17 +84,21 @@ namespace stud
     std::uint8_t  clock_seq_hir = 0; // hi_and_reserved
     std::uint8_t  clock_seq_low = 0;
     std::uint8_t  node[6] = {0, 0, 0, 0, 0, 0};
+    //-
 
-    // System UUID generator. See the uuid_generator interface for details.
+    //-
+    // System UUID generator. See the `uuid_generator` interface for details.
     //
-    // Note: system generator cannot be called during static initialization.
+    //| System generator cannot be called during static initialization.
     //
     static uuid_system_generator system_generator;
 
     static uuid
     generate (bool strong = true);
+    //-
 
-    // Create a nil UUID (all members are 0).
+    //-
+    // Create a nil UUID (all data members are 0).
     //
     uuid () = default;
 
@@ -69,33 +106,38 @@ namespace stud
     nil () const;
 
     explicit operator bool () const;
+    //-
 
+    //-
     // Create a UUID from a 16-octet binary representation with the sizes and
-    // order of the fields as defined in RFC4122 Section 4.1.2 and with each
+    // order of the fields as defined in RFC4122, Section 4.1.2 and with each
     // field encoded with the most significant byte first (also known as
     // big-endian or network byte order).
+    //
+    //| The C array constructor is compatible with the `uuid_t` type from
+    //| `libuuid`.
     //
     using binary_type = std::array<std::uint8_t, 16>;
 
     explicit
     uuid (const binary_type&);
 
-    void
-    assign (const binary_type&);
-
-    binary_type
-    binary () const noexcept;
-
-    // Note that this constructor is compatible with libuuid's uuid_t type.
-    //
     explicit
     uuid (const std::uint8_t (&)[16]);
 
     void
+    assign (const binary_type&);
+
+    void
     assign (const std::uint8_t (&)[16]);
 
+    binary_type
+    binary () const noexcept;
+    //-
+
 #ifdef _WIN32
-    // Create a UUID from Win32 GUID.
+    //-
+    // Create a UUID from Win32 `GUID`.
     //
     uuid (const _GUID&);
 
@@ -105,16 +147,17 @@ namespace stud
     template <typename G = _GUID>
     G
     guid () const;
+    //-
 #endif
 
-    // Create a UUID from a 36-character string representation in the
-    //
+    //-
+    // Create a UUID from a 36-character upper or lower case string
+    // representation in the following form:
+    //`
     //   xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-    //
-    // form which can be in lower or upper case. Throw std::invalid_argument
-    // if the representation is invalid.
-    //
-    // The returned string representation is by default in lower case.
+    //`
+    // Throw `std::invalid_argument` if the representation is invalid. The
+    // returned string representation is by default in the lower case.
     //
     explicit
     uuid (const std::string&);
@@ -133,8 +176,10 @@ namespace stud
 
     std::array<char, 37>
     c_string (bool upper = false) const;
+    //-
 
-    // UUID variant (type) and version (sub-type).
+    //-
+    // Query UUID variant (type) and version (sub-type).
     //
     using variant_type = uuid_variant;
     using version_type = uuid_version;
@@ -144,13 +189,17 @@ namespace stud
 
     version_type
     version () const;
+    //-
 
+    //-
     // UUID comparison.
     //
     int
     compare (const uuid&) const;
+    //-
 
-    // Swapping and moving. On move we make the moved-from instance nil.
+    //-
+    // Swapping and moving. Note that a moved-from instance is made nil.
     //
     void
     swap (uuid&);
@@ -160,57 +209,76 @@ namespace stud
 
     uuid& operator= (uuid&&);
     uuid& operator= (const uuid&) = default;
+    //-
   };
 
+  //-
+  // Comparison operators.
+  //
   bool operator== (const uuid&, const uuid&);
   bool operator!= (const uuid&, const uuid&);
   bool operator<  (const uuid&, const uuid&);
   bool operator>  (const uuid&, const uuid&);
   bool operator<= (const uuid&, const uuid&);
   bool operator>= (const uuid&, const uuid&);
+  //-
 
-  // For iostream operators see uuid-io.hxx.
+  //-
+  // Note: for `iostream` operators see `uuid-io.hxx`.
+  //-
 
+  //- #uuid_generator `uuid_generator`
+  //
   // UUID generator interface.
   //
   class LIBSTUD_UUID_SYMEXPORT uuid_generator
+  //-
   {
   public:
-    virtual
-    ~uuid_generator () = default;
-
-    // Generate a UUID. If strong is true (default), generate a strongly-
-    // unique UUID. Throw std::runtime_error to report errors, including if
-    // strong uniqueness cannot be guaranteed.
+    //-
+    // Generate a UUID. If strong is `true` (default), generate a
+    // strongly-unique UUID. Throw `std::runtime_error` to report errors,
+    // including if strong uniqueness cannot be guaranteed.
     //
     // A weak UUID is not guaranteed to be unique, neither universialy nor
     // locally (that is, on the machine it has been generated).
     //
     virtual uuid
     generate (bool strong = true) = 0;
+    //-
+
+    virtual
+    ~uuid_generator () = default;
   };
 
+  //- #uuid_generator `uuid_generator`
+  //
   // System UUID generator.
   //
   class LIBSTUD_UUID_SYMEXPORT uuid_system_generator: public uuid_generator
+  //-
   {
   public:
-    // Throw std::system_error with the generic category and ENOTSUP error
+    //-
+    // Throw `std::system_error` with the generic category and `ENOTSUP` error
     // code if strong uniqueness cannot be guaranteed.
     //
     virtual uuid
     generate (bool strong = true) override;
+    //-
 
+    //-
     // Optional explicit initialization and termination. Note that it is not
-    // thread-safe and must only be performed once (normally from main())
-    // before/after any calls to generate(), respectively. Both functions may
-    // throw std::runtime_error to report errors.
+    // thread-safe and must only be performed once (normally from `main()`)
+    // before/after any calls to `generate()`, respectively. Both functions
+    // may throw `std::runtime_error` to report errors.
     //
     static void
     initialize ();
 
     static void
     terminate ();
+    //-
   };
 }
 
