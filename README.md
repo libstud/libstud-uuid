@@ -9,8 +9,7 @@ Typical usage:
 #include <string>
 #include <iostream>
 
-#include <libstud/uuid/uuid.hxx>
-#include <libstud/uuid/uuid-io.hxx>
+#include <libstud/uuid.hxx>
 
 int main ()
 {
@@ -23,11 +22,13 @@ int main ()
 }
 ```
 
-See the [`libstud/uuid/uuid.hxx`][uuid.hxx] header for interface details and
+See the [`libstud/uuid/uuid.hxx`][uuid.hxx] and
+[`libstud/uuid/uuid-io.hxx`][uuid-io.hxx] headers for interface details and
 the [`NEWS`][news] file for changes. See the [`cppget.org/libstud-uuid`][pkg]
 package page for build status.
 
 
 [news]:     https://github.com/libstud/libstud-uuid/blob/master/NEWS
 [uuid.hxx]: https://github.com/libstud/libstud-uuid/blob/master/libstud/uuid/uuid.hxx
+[uuid-io.hxx]: https://github.com/libstud/libstud-uuid/blob/master/libstud/uuid/uuid-io.hxx
 [pkg]:      https://cppget.org/libstud-uuid

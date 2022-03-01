@@ -5,8 +5,7 @@
 #include <sstream>
 #include <iostream>
 
-#include <libstud/uuid/uuid.hxx>
-#include <libstud/uuid/uuid-io.hxx>
+#include <libstud/uuid.hxx>
 
 #undef NDEBUG
 #include <cassert>

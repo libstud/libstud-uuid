@@ -1,4 +1,5 @@
-lib{stud-uuid}: {hxx ixx cxx}{uuid} {hxx cxx}{uuid-io} hxx{export version}
+lib{stud-uuid}: {hxx ixx cxx}{uuid} {hxx cxx}{uuid-io} hxx{export version} \
+  ../hxx{uuid}
 
 tcls = $cxx.target.class
 tsys = $cxx.target.system
@@ -60,8 +61,8 @@ else
 # Install into the libstud/uuid/ subdirectory of, say, /usr/include/
 # recreating subdirectories.
 #
-{hxx ixx txx}{*}:
+../{hxx ixx txx}{*}:
 {
-  install         = include/libstud/uuid/
+  install         = include/libstud/
   install.subdirs = true
 }
