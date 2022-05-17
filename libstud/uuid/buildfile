@@ -9,6 +9,7 @@ lib{stud-uuid}: cxx{uuid-macos}:      include = ($tcls  == 'macos')
 lib{stud-uuid}: cxx{uuid-windows}:    include = ($tcls  == 'windows')
 lib{stud-uuid}: cxx{uuid-freebsd}:    include = ($tsys == 'freebsd' || \
                                                  $tsys == 'netbsd')
+lib{stud-uuid}: cxx{uuid-openbsd}:    include = ($tsys == 'openbsd')
 lib{stud-uuid}: cxx{uuid-emscripten}: include = ($tsys == 'emscripten')
 
 switch $tcls, $tsys
