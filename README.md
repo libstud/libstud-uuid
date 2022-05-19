@@ -1,7 +1,14 @@
 # libstud-uuid - UUID generation library for C++
 
 A portable, dependency-free, MIT-licensed UUID generation library for C++ that
-makes sure the generated IDs are actually unique.
+tries to make reasonably sure the generated IDs are unique.
+
+Specifically, the implementation calls platform-specific APIs that were
+carefully analyzed for uniqueness guarantees (good source of randomness, time
+collision prevention, etc). If an API does not explicitly provide such
+guarantees or if such guarantees are only provided for certain UUID versions,
+then the implementation will refuse to return such a UUID if a strong
+uniqueness was requested.
 
 Typical usage:
 
