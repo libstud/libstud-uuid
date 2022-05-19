@@ -1,3 +1,9 @@
+Version 1.0.6
+
+  * Add support for OpenBSD.
+
+    Strong UUIDs should be available at least from OpenBSD 6.4.
+
 Version 1.0.5
 
   * Add the <libstud/uuid.hxx> convenience header.
