@@ -2,7 +2,7 @@
 
 #include <errno.h> // ENOTSUP
 
-#include <cstdio>       // sprintf() scanf()
+#include <cstdio>       // snprintf() sscanf()
 #include <cstring>      // strlen()
 #include <stdexcept>
 #include <system_error>
@@ -16,16 +16,17 @@ namespace stud
   {
     array<char, 37> r;
 
-    sprintf (r.data (),
-             (upper
-              ? "%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X"
-              : "%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x"),
-             time_low,
-             time_mid,
-             time_hiv,
-             clock_seq_hir,
-             clock_seq_low,
-             node[0], node[1], node[2], node[3], node[4], node[5]);
+    snprintf (r.data (),
+              37,
+              (upper
+               ? "%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X"
+               : "%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x"),
+              time_low,
+              time_mid,
+              time_hiv,
+              clock_seq_hir,
+              clock_seq_low,
+              node[0], node[1], node[2], node[3], node[4], node[5]);
 
     return r;
   }
