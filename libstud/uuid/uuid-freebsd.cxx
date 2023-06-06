@@ -18,10 +18,10 @@ namespace stud
   uuid uuid_system_generator::
   generate (bool strong)
   {
-    // While FreeBSD shares the uuid_*() (<uuid.h>, uuid(3)) API with OpenBSD,
-    // its documentation is quite light on the kind of UUID we get and with
-    // what guarantees. The implementation of uuid_create() simply calls the
-    // uuidgen() system call (<sys/uuid.h>, uuidgen(2)) which has some
+    // While FreeBSD shares the uuid_*() (<uuid.h>, uuid(3)) API with other
+    // BSDs, its documentation is quite light on the kind of UUID we get and
+    // with what guarantees. The implementation of uuid_create() simply calls
+    // the uuidgen() system call (<sys/uuid.h>, uuidgen(2)) which has some
     // details.
     //
     // Specifically (and as of FreeBSD 11.2), we get a version 1 (MAC/time-

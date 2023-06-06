@@ -180,7 +180,7 @@ namespace stud
     ~uuid_generator () = default;
 
     // Generate a UUID. If strong is true (default), generate a strongly-
-    // unique UUID. Throw std::runtime_error to report errors, including if
+    // unique UUID. Throw std::system_error to report errors, including if
     // strong uniqueness cannot be guaranteed.
     //
     // A weak UUID is not guaranteed to be unique, neither universialy nor
@@ -204,7 +204,7 @@ namespace stud
     // Optional explicit initialization and termination. Note that it is not
     // thread-safe and must only be performed once (normally from main())
     // before/after any calls to generate(), respectively. Both functions may
-    // throw std::runtime_error to report errors.
+    // throw std::system_error to report errors.
     //
     static void
     initialize ();
