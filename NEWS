@@ -1,5 +1,7 @@
 Version 1.0.7
 
+  * Make move constructor/assignment noexcept.
+
   * Use snprintf() instead of sprintf() to avoid warnings.
 
 Version 1.0.6

@@ -36,14 +36,14 @@ namespace stud
   }
 
   inline uuid::
-  uuid (uuid&& u)
+  uuid (uuid&& u) noexcept
       : uuid () // nil
   {
     swap (u);
   }
 
   inline uuid& uuid::
-  operator= (uuid&& u)
+  operator= (uuid&& u) noexcept
   {
     if (this != &u)
     {
