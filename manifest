@@ -1,7 +1,7 @@
 : 1
 name: libstud-uuid
 project: libstud
-version: 1.0.7-a.0.z
+version: 1.0.7
 summary: Portable UUID generation library for C++
 license: MIT ; MIT License.
 topics: C++, UUID, identification
